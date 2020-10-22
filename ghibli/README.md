@@ -1,12 +1,12 @@
-## eveonecat
+## ghibli
 
-多线程下载[EverydayOneCat](http://motions.cat/top.html)网站的所有gif
+多线程下载[Ghibli 作品静止画](http://www.ghibli.jp/works/)网站的所有分类图片
 
 ### 使用方法
 
 直接运行：
 ```sh
-python eveonecat.py
+python ghibli.py
 ```
 
 ![](screenshot-download.jpg)
