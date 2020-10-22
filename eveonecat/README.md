@@ -9,7 +9,7 @@
 python eveonecat.py
 ```
 
-![](screenshot-download.jpg)
+![](screenshot-eveonecat.jpg)
 
 自定义下载线程数以及下载目录：
 ```python

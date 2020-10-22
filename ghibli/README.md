@@ -9,7 +9,7 @@
 python ghibli.py
 ```
 
-![](screenshot-download.jpg)
+![](screenshot-ghibli.jpg)
 
 自定义下载线程数以及下载目录：
 ```python
