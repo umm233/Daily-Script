@@ -43,7 +43,7 @@ if __name__ == '__main__':
     }
     # 设置最大线程数
     thread_lock = threading.BoundedSemaphore(value=5)
-    # 设置下载目录
+    # 设置下载分类
     pic_ca = ["karigurashi", "kokurikozaka", "kazetachinu", "kaguyahime", "marnie","ged","chihiro", "ponyo", "baron", "mononoke", "howl", "mimi", "yamada", "ghiblies"]
     for ca in pic_ca:
         print("=== 开始下载 {} 分类 ===".format(ca))

@@ -11,10 +11,10 @@ python ghibli.py
 
 ![](screenshot-ghibli.jpg)
 
-自定义下载线程数以及下载目录：
+自定义下载线程数以及下载分类：
 ```python
 # 设置最大线程数
 thread_lock=threading.BoundedSemaphore(value=5)
-# 设置下载目录
-pic_dir = "pics/"
+# 设置下载分类，可从网页 url 中找到，如 http://www.ghibli.jp/works/chihiro
+pic_ca = ["chihiro"]
 ```
