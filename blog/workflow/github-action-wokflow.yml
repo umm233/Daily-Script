@@ -1,0 +1,55 @@
+name: Hexo Deploy
+
+# 只监听 source 分支的改动
+on:
+  push:
+    branches:
+      - master
+
+# 自定义环境变量
+env:
+  GIT_USER: your_name
+  GIT_EMAIL: your_email_address
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 获取博客源码和主题
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 这里用的是 Node.js 13.x，14.x 生成 Hexo 静态页面会有问题
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13'
+
+      # 安装依赖
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      # 从之前设置的 secret 获取部署私钥
+      - name: Setup SSH Keys and known_hosts
+        env:
+          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_SECRET" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name $GIT_USER
+          git config --global user.email $GIT_EMAIL
+
+      # 生成并部署 `npx hexo clean && npx hexo g -d` or `npm run deploy`
+      - name: Deploy
+        run: |
+          npx hexo clean && npx hexo g -d
+
+      # 部署后更新博客源码，用于添加 abbrlink
+      - name: Update Blog
+        run: |
+          sh "${GITHUB_WORKSPACE}/.github/script/blog-update.sh"
