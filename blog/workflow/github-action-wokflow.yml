@@ -18,13 +18,21 @@ jobs:
     steps:
       # 获取博客源码和主题
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # 这里用的是 Node.js 13.x，14.x 生成 Hexo 静态页面会有问题
+      # 这里用的是 Node.js 16.x
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: '13'
+          node-version: '16'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
 
       # 安装依赖
       - name: Install Dependencies
